@@ -1,0 +1,13 @@
+.arrow:hover .arrow-path-visible { 
+  stroke: #007bff !important; 
+  stroke-width: 3px !important; 
+}
+
+.arrow:hover .arrow-polygon { 
+  fill: #007bff !important; 
+  stroke: #007bff !important; 
+  transform-box: fill-box; 
+  transform-origin: center; 
+  transform: scale(1.5); 
+  transition: transform 0.1s ease-out; 
+}

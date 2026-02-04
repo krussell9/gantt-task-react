@@ -38,9 +38,26 @@ export const Arrow: React.FC<ArrowProps> = ({
   }
 
   return (
-    <g className="arrow">
-      <path strokeWidth="1.5" d={path} fill="none" />
-      <polygon points={trianglePoints} />
+    <g
+      className="arrow"
+      data-from={taskFrom.id}
+      data-to={taskTo.id}
+      style={{ cursor: "pointer" }}
+    >
+      <path
+        className="arrow-path-visible"
+        strokeWidth="1.5"
+        d={path}
+        fill="none"
+      />
+      <path
+        className="arrow-path-hitbox"
+        strokeWidth="15"
+        d={path}
+        fill="none"
+        style={{ stroke: "transparent" }}
+      />
+      <polygon className="arrow-polygon" points={trianglePoints} />
     </g>
   );
 };
