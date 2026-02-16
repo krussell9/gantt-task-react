@@ -55,10 +55,13 @@ export const TaskList: React.FC<TaskListProps> = ({
   TaskListTable,
 }) => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Unused vars
+  void scrollY;
+  void ganttHeight;
+
   useEffect(() => {
-    if (horizontalContainerRef.current) {
-      horizontalContainerRef.current.scrollTop = scrollY;
-    }
+    // Removed manual sync
   }, [scrollY]);
 
   const headerProps = {
@@ -81,12 +84,14 @@ export const TaskList: React.FC<TaskListProps> = ({
   };
 
   return (
-    <div ref={taskListRef}>
-      <TaskListHeader {...headerProps} />
+    <div ref={taskListRef} style={{ position: "sticky", left: 0, zIndex: 20, backgroundColor: "#fff", height: "fit-content" }}>
+      <div style={{ position: "sticky", top: 0, zIndex: 30, backgroundColor: "#fff", height: headerHeight }}>
+        <TaskListHeader {...headerProps} />
+      </div>
       <div
         ref={horizontalContainerRef}
         className={horizontalContainerClass}
-        style={ganttHeight ? { height: ganttHeight } : {}}
+        style={{}}
       >
         <TaskListTable {...tableProps} />
       </div>

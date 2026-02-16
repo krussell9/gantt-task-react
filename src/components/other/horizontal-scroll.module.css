@@ -5,6 +5,13 @@
   scrollbar-width: thin;
   /*iPad*/
   height: 1.2rem;
+  
+  /* Sticky behavior */
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  background-color: var(--gantt-head-bg, #ffffff); /* Ensure scrollbar track has background so content behind doesn't show through */
 }
 .scrollWrapper::-webkit-scrollbar {
   width: 1.1rem;

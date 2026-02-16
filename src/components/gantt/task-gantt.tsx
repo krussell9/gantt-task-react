@@ -20,45 +20,50 @@ export const TaskGantt: React.FC<TaskGanttProps> = ({
   scrollY,
   scrollX,
 }) => {
+  // Unused vars: ganttHeight, scrollY, scrollX
+  void ganttHeight;
+  void scrollY;
+  void scrollX;
   const ganttSVGRef = useRef<SVGSVGElement>(null);
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   const verticalGanttContainerRef = useRef<HTMLDivElement>(null);
   const newBarProps = { ...barProps, svg: ganttSVGRef };
 
   useEffect(() => {
-    if (horizontalContainerRef.current) {
-      horizontalContainerRef.current.scrollTop = scrollY;
-    }
+    // Removed manual sync
   }, [scrollY]);
 
   useEffect(() => {
-    if (verticalGanttContainerRef.current) {
-      verticalGanttContainerRef.current.scrollLeft = scrollX;
-    }
+    // Removed manual sync
   }, [scrollX]);
 
   return (
     <div
-      className={styles.ganttVerticalContainer}
+      className={styles.ganttVerticalContainer} // .ganttVerticalContainer { overflow: hidden; }
       ref={verticalGanttContainerRef}
       dir="ltr"
+      style={{
+        display: "block",
+        minWidth: gridProps.svgWidth,
+        flex: 1, // Allow taking remaining space
+        overflow: "visible", // Override CSS overflow: hidden
+        height: "fit-content", // Allow container to grow, doesn't trap sticky
+      }}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={gridProps.svgWidth}
-        height={calendarProps.headerHeight}
-        fontFamily={barProps.fontFamily}
-      >
-        <Calendar {...calendarProps} />
-      </svg>
+        <div style={{ position: "sticky", top: 0, zIndex: 10, backgroundColor: "#fff", height: calendarProps.headerHeight, width: "100%", overflow: "hidden" }}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={gridProps.svgWidth}
+          height={calendarProps.headerHeight}
+          fontFamily={barProps.fontFamily}
+        >
+          <Calendar {...calendarProps} />
+        </svg>
+      </div>
       <div
         ref={horizontalContainerRef}
         className={styles.horizontalContainer}
-        style={
-          ganttHeight
-            ? { height: ganttHeight, width: gridProps.svgWidth }
-            : { width: gridProps.svgWidth }
-        }
+        style={{ width: gridProps.svgWidth, overflow: "visible" }} // Override CSS overflow: hidden
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
