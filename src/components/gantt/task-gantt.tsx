@@ -50,7 +50,7 @@ export const TaskGantt: React.FC<TaskGanttProps> = ({
         height: "fit-content", // Allow container to grow, doesn't trap sticky
       }}
     >
-        <div style={{ position: "sticky", top: 0, zIndex: 10, backgroundColor: "#fff", height: calendarProps.headerHeight, width: "100%", overflow: "hidden" }}>
+        <div style={{ position: "sticky", top: 0, zIndex: 10, height: calendarProps.headerHeight, width: "100%", overflow: "hidden" }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={gridProps.svgWidth}
